@@ -1,0 +1,253 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Heatmap of ADII dimension scores relative to the national average for each state and territory, capital cities and the rest of Australia.",
+  "title": {
+    "text": [
+      "Outside the capitals, skills trail most; Tasmania lags on",
+      "every dimension"
+    ],
+    "subtitle": [
+      "Score minus national score (points). National: Access 76.8, Affordability 70.3, Digital Ability",
+      "73.6. Source: ADII 2025, Figure 1"
+    ]
+  },
+  "width": 330,
+  "height": 360,
+  "config": {
+    "font": "Source Sans 3",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "gridColor": "#e3e8ee",
+      "domainColor": "#b8c2cc",
+      "tickColor": "#b8c2cc",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "legend": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "DM Sans",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#16324f",
+      "subtitleFont": "Source Sans 3",
+      "subtitleColor": "#5b6b7b",
+      "subtitleFontSize": 12.5,
+      "offset": 10
+    },
+    "text": {
+      "font": "Source Sans 3"
+    }
+  },
+  "padding": {
+    "right": 160,
+    "left": 5,
+    "top": 5,
+    "bottom": 5
+  },
+  "data": {
+    "url": "processed/adii_dimension_gaps.csv"
+  },
+  "encoding": {
+    "x": {
+      "field": "dimension",
+      "type": "ordinal",
+      "sort": [
+        "Access",
+        "Affordability",
+        "Digital Ability"
+      ],
+      "axis": {
+        "title": null,
+        "orient": "top",
+        "labelAngle": 0,
+        "labelFontSize": 12.5,
+        "ticks": false,
+        "domain": false
+      }
+    },
+    "y": {
+      "field": "group",
+      "type": "ordinal",
+      "sort": [
+        "ACT",
+        "VIC",
+        "NSW",
+        "WA",
+        "QLD",
+        "NT",
+        "SA",
+        "TAS",
+        "Capital cities",
+        "Rest of Australia"
+      ],
+      "axis": {
+        "title": null,
+        "labelFontSize": 12.5,
+        "ticks": false,
+        "domain": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "white",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "gap",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -8,
+              0,
+              8
+            ],
+            "range": [
+              "#e4572e",
+              "#f5f5f2",
+              "#16324f"
+            ],
+            "interpolate": "lab"
+          },
+          "legend": {
+            "title": "Gap (pts)",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 160
+          }
+        },
+        "tooltip": [
+          {
+            "field": "group",
+            "title": "Group"
+          },
+          {
+            "field": "dimension",
+            "title": "Dimension"
+          },
+          {
+            "field": "score",
+            "title": "Score"
+          },
+          {
+            "field": "gap",
+            "title": "Gap vs national",
+            "format": "+.1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12.5,
+        "fontWeight": 600
+      },
+      "encoding": {
+        "text": {
+          "field": "gap",
+          "type": "quantitative",
+          "format": "+.1f"
+        },
+        "color": {
+          "condition": {
+            "test": "abs(datum.gap) > 5",
+            "value": "white"
+          },
+          "value": "#3b4a5a"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.group == 'NT' && datum.dimension == 'Access'"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "fill": null,
+        "stroke": "#000",
+        "strokeWidth": 2.5
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.group == 'Rest of Australia' && datum.dimension == 'Digital Ability'"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "fill": null,
+        "stroke": "#000",
+        "strokeWidth": 2.5
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "group": "NT",
+            "dimension": "Digital Ability"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontStyle": "italic",
+        "fontSize": 12.5,
+        "color": "#e4572e",
+        "fontWeight": 600,
+        "text": [
+          "Largest state gap:",
+          "NT Access, -5.1 pts"
+        ],
+        "dx": 78
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "group": "Rest of Australia",
+            "dimension": "Digital Ability"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontStyle": "italic",
+        "fontSize": 12.5,
+        "color": "#e4572e",
+        "fontWeight": 600,
+        "text": [
+          "Largest gap overall:",
+          "outside capitals, -5.3 pts"
+        ],
+        "dx": 78
+      }
+    }
+  ]
+}

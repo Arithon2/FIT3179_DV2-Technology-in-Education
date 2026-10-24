@@ -1,0 +1,9 @@
+state_name,code,index,access,affordability,ability,label_lon,label_lat
+Australian Capital Territory,ACT,79.5,80.9,78.0,79.6,152.6,-36.6
+New South Wales,NSW,74.0,77.0,71.1,73.8,146.5,-32.2
+Northern Territory,NT,72.5,71.7,71.9,73.7,133.3,-19.6
+Queensland,QLD,72.9,76.3,69.3,73.0,144.6,-22.6
+South Australia,SA,71.3,75.7,66.9,71.3,135.0,-30.5
+Tasmania,TAS,69.4,73.0,65.4,69.7,146.6,-42.2
+Victoria,VIC,74.1,77.5,70.5,74.3,144.0,-36.9
+Western Australia,WA,73.9,77.1,70.8,73.7,122.0,-26.0

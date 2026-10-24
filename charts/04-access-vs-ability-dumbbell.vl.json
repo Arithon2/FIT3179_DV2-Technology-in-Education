@@ -1,0 +1,276 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Dumbbell plot comparing Access and Digital Ability index scores by remoteness area.",
+  "title": {
+    "text": [
+      "In very remote Australia, skills outrun access by six points"
+    ],
+    "subtitle": [
+      "ADII 2025 dimension scores (0-100) by remoteness. Source: ADII 2025, Figure 9"
+    ]
+  },
+  "width": 560,
+  "height": 300,
+  "config": {
+    "font": "Source Sans 3",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "gridColor": "#e3e8ee",
+      "domainColor": "#b8c2cc",
+      "tickColor": "#b8c2cc",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "legend": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "DM Sans",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#16324f",
+      "subtitleFont": "Source Sans 3",
+      "subtitleColor": "#5b6b7b",
+      "subtitleFontSize": 12.5,
+      "offset": 10
+    },
+    "text": {
+      "font": "Source Sans 3"
+    }
+  },
+  "data": {
+    "url": "processed/adii_remoteness.csv"
+  },
+  "encoding": {
+    "y": {
+      "field": "remoteness",
+      "type": "ordinal",
+      "sort": [
+        "Major cities",
+        "Inner regional",
+        "Outer regional",
+        "Remote",
+        "Very remote"
+      ],
+      "axis": {
+        "title": null,
+        "labelFontSize": 13,
+        "domain": false,
+        "ticks": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 3,
+        "color": "#c5ced8"
+      },
+      "encoding": {
+        "x": {
+          "field": "access",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              50,
+              85
+            ]
+          }
+        },
+        "x2": {
+          "field": "ability"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "fold": [
+            "access",
+            "ability"
+          ],
+          "as": [
+            "dimension",
+            "score"
+          ]
+        },
+        {
+          "calculate": "datum.dimension == 'access' ? 'Access' : 'Digital Ability'",
+          "as": "dim"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "size": 190,
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "score",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              50,
+              85
+            ]
+          },
+          "axis": {
+            "title": "Index score (0-100)",
+            "grid": true
+          }
+        },
+        "color": {
+          "field": "dim",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Access",
+              "Digital Ability"
+            ],
+            "range": [
+              "#16324f",
+              "#e4572e"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "top",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "remoteness",
+            "title": "Area"
+          },
+          {
+            "field": "dim",
+            "title": "Dimension"
+          },
+          {
+            "field": "score",
+            "title": "Score"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "calculate": "max(datum.access, datum.ability)",
+          "as": "hi"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 12,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "color": "#3b4a5a"
+      },
+      "encoding": {
+        "x": {
+          "field": "hi",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              50,
+              85
+            ]
+          }
+        },
+        "text": {
+          "field": "hi",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "calculate": "min(datum.access, datum.ability)",
+          "as": "lo"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -12,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "color": "#3b4a5a"
+      },
+      "encoding": {
+        "x": {
+          "field": "lo",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              50,
+              85
+            ]
+          }
+        },
+        "text": {
+          "field": "lo",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "remoteness": "Very remote",
+            "x": 68.5,
+            "t": [
+              "Access trails Digital Ability",
+              "by 6.2 points"
+            ]
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontStyle": "italic",
+        "fontSize": 12.5,
+        "color": "#e4572e",
+        "fontWeight": 600
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              50,
+              85
+            ]
+          }
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connected Classrooms, Unequal Opportunities</title>
+  <meta name="description" content="A data report on digital inclusion, student ICT literacy and educational opportunity in Australian schools (FIT3179 Data Visualisation 2).">
+
+  <!-- Pure.css (from pure-css.github.io) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main class="report">
+
+  <!-- masthead section ie title section basically -->
+  <header class="masthead">
+    <p class="eyebrow">Technology in Education</p>
+    <h1>Connected Classrooms</h1>
+    <p class="subtitle">Unequal Opportunities in Australian Education</p>
+    <p class="standfirst">A data-driven investigation of digital inclusion, student ICT literacy and educational opportunity. It asks whether Australian students have equal chances to access digital technology, and to benefit from it.</p>
+    <p class="byline">Luke Downward (33656974), Monash University, 24 October 2026</p>
+
+    <div class="finding">
+      <p class="stat">37%</p>
+      <p>of Year 10 students reached the proficient standard in ICT literacy in 2025, the lowest share since the national assessment began in 2005. Year 6 fell to 50%.</p>
+      <p class="src">Source: ACARA, National Assessment Program ICT Literacy (NAP-ICTL) 2025, published May 2026.</p>
+    </div>
+
+    <ul class="toc" aria-label="Report contents">
+      <li><a href="#context">Context</a></li>
+      <li><a href="#access">Access</a></li>
+      <li><a href="#geography">Geography</a></li>
+      <li><a href="#groups">Student groups</a></li>
+      <li><a href="#change">Change</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+      <li><a href="#references">References</a></li>
+    </ul>
+  </header>
+
+  <!-- context -->
+  <section id="context">
+    <h2>The connected classroom</h2>
+    <p class="deck">Opening and national context</p>
+
+    <p class="lede">Digital technology is now part of almost every layer of schooling, from learning platforms and online assessment to generative artificial intelligence. Yet being surrounded by technology is not the same as knowing how to use it well. Australia's latest national test of ICT literacy puts that gap in numbers.</p>
+
+    <p>In 2025, half of Year 6 students (50%) reached the proficient standard, down from 55% in 2022. Among Year 10 students the share was 37%, down from 46% in 2022 and the lowest since testing began. ACARA noted that these results sit alongside students reporting extensive everyday experience with digital tools.</p>
+
+    <p>That contrast shapes the question for this report. If use is high but proficiency is falling, then <em>access</em> to devices cannot be the whole story. A student may own a device but lack a reliable connection, suitable learning resources, or the confidence and guidance to use tools critically. Place, household circumstances and the school a child attends may all shape what is possible.</p>
+
+    <p>The report moves through six steps: the scale of the system, access, geography, student groups, change over time, and finally what an equitable digital classroom would require. It uses original charts built from downloaded datasets, not copies of published graphs.</p>
+
+    <h3>The scale of Australian schooling</h3>
+    <p>Before looking for differences it helps to see the system's shape. ACARA's 2025 school profile covers 9,755 schools, and 9,694 of them could be placed on a map in this report. Together they enrol about 4.2 million students.</p>
+
+    <figure class="chart">
+      <p class="fig-no">Figure 1</p>
+      <div class="vega-host" data-spec="charts/01-sector-scale.vl.json" role="img" aria-label="Proportional circles showing enrolments in government, Catholic and independent schools. Government schools enrol 2.66 million students, Catholic 0.78 million and independent 0.77 million." aria-busy="true"></div>
+      <figcaption class="source">Source: ACARA, School Profile 2025 (Data Access Program), school enrolments summed by sector for the 9,694 schools with a mappable location.</figcaption>
+    </figure>
+    <div class="read">
+      <h4>Reading the chart</h4>
+      <p>Circle area is proportional to total enrolments. Government schools enrol 2.66 million students (about 63% of the total), against 0.78 million in Catholic schools and 0.77 million in independent schools. The orange note marks the less obvious point: independent schools are the fewest at 1,248, but their average campus (617 students) is the largest of the three sectors, against 459 for Catholic and 393 for government schools.</p>
+      <p>This matters for what follows. Policy aimed at government schools reaches most students, but sectors differ in size and, as later charts show, in the advantage of their communities.</p>
+    </div>
+
+    <h3>ICT literacy is moving in the wrong direction</h3>
+    <figure class="chart">
+      <p class="fig-no">Figure 2</p>
+      <div class="vega-host" data-spec="charts/02-ict-literacy-slope.vl.json" role="img" aria-label="Slopegraph. Year 6 proficiency was 53% in 2017, 55% in 2022 and 50% in 2025. Year 10 was 54%, 46% and 37%." aria-busy="true"></div>
+      <figcaption class="source">Source: ACARA, NAP-ICT Literacy public reports for 2017, 2022 and 2025 (<a href="https://nap.edu.au/docs/default-source/nap-sample/nap-ictl-2025-public-report.pdf">2025 report</a>; <a href="https://www.acara.edu.au/docs/default-source/media-releases/media-release-latest-data-reveals-digital-skills-amongst-young-australians.pdf">2022 media release</a>). Percentages are as published; the 2025 sample was 5,498 Year 6 and 4,753 Year 10 students.</figcaption>
+    </figure>
+    <div class="read">
+      <h4>Reading the chart</h4>
+      <p>Each line follows one year level across three assessment rounds. The shaded band highlights the latest change, and the labels give the point change since 2022: five points for Year 6 and nine for Year 10. The two year levels began almost level in 2017 (53% and 54%) and have since diverged, so the Year 10 line falls steeply while Year 6 dipped.</p>
+      <p>The result establishes that measured proficiency has dropped. It does not tell us why, and it does not show that students have less access to devices. The remaining sections look for context that could help explain who is most exposed to this decline, while staying honest about what the data cannot prove.</p>
+    </div>
+  </section>
+
+  <!-- covers what access is avaliable across Aus  -->
+  <section id="access">
+    <h2>Access is the starting point</h2>
+    <p class="deck">Devices, connectivity and affordability</p>
+
+    <p class="lede">Digital inclusion is a precondition for digital learning. The Australian Digital Inclusion Index (ADII) scores Access, Affordability and Digital Ability on a 0 to 100 scale, using a 2024 survey of Australian households. It describes the whole population, so it frames the environment students live in rather than measuring students directly.</p>
+
+    <p>Nationally the picture is improving. The 2025 total index score is 73.6, and Access has risen 4.8 points since 2023 to 76.8. But about one in five Australians (20.6%) are still excluded or highly excluded, and 9.7% rely on a mobile connection alone. For schoolwork, that matters: the ADII notes that smartphones can support basic participation but are not designed for many study tasks, which need a laptop or desktop computer. Around 4% of Australians say their household lacks enough devices for everyone's needs, and the rate is higher for people who are unemployed (15.6%), did not finish secondary school (10.8%) or live in public housing (10.8%).</p>
+
+    <figure class="chart">
+      <p class="fig-no">Figure 3</p>
+      <div class="vega-host" data-spec="charts/03-digital-inclusion-choropleth.vl.json" role="img" aria-label="Choropleth map of Australia. ADII 2025 total scores: ACT 79.5, Victoria 74.1, New South Wales 74.0, Western Australia 73.9, Queensland 72.9, Northern Territory 72.5, South Australia 71.3, Tasmania 69.4." aria-busy="true"></div>
+      <figcaption class="source">Source: Thomas et al. (2025), <em>Measuring Australia's Digital Divide: 2025 Australian Digital Inclusion Index</em>, Figure 1 (state and territory scores re-entered as a table; map drawn here). State boundaries: rowanhogan/australian-states (GitHub), simplified with Mapshaper. DOI 10.60836/mtsq-at22.</figcaption>
+    </figure>
+    <div class="read">
+      <h4>Reading the chart</h4>
+      <p>Darker blue means a higher total index score. The spread across jurisdictions is about ten points, from 69.4 in Tasmania to 79.5 in the ACT. Five of the eight sit within two points of the national score (73.6), so the story is less a uniform gradient than a small high-scoring territory, a cluster near the average and a tail of lower-scoring jurisdictions led by Tasmania and South Australia (71.3).</p>
+      <p>The ACT is small and almost entirely urban, so its score is not a model for the rest. The ADII itself ties state differences partly to socioeconomic composition, for example Tasmania's lower median personal income and older population, so the map shows where inclusion is lower without isolating the reasons.</p>
+    </div>
+
+    <h3>Access is not the same as ability</h3>
+    <p>A connection is only useful if people can afford and use it. ADII Access and Digital Ability do not always move together, and the gap between them changes with remoteness.</p>
+
+    <figure class="chart">
+      <p class="fig-no">Figure 4</p>
+      <div class="vega-host" data-spec="charts/04-access-vs-ability-dumbbell.vl.json" role="img" aria-label="Dumbbell plot. Access scores fall from 78.3 in major cities to 57.4 in very remote areas, while Digital Ability falls from 75.4 to 63.6." aria-busy="true"></div>
+      <figcaption class="source">Source: Thomas et al. (2025), ADII 2025, Figure 9 (scores by remoteness re-entered as a table). Whole-population measure.</figcaption>
+    </figure>
+    <div class="read">
+      <h4>Reading the chart</h4>
+      <p>Each row compares the two scores for one remoteness area. In major cities, Access (78.3) sits about three points above Digital Ability (75.4). In very remote areas the order reverses: Access is 57.4 and Digital Ability 63.6, so Access trails by 6.2 points, the orange annotation. Remote areas are close to level, and inner and outer regional areas have Access about four to five points above ability.</p>
+      <p>A plausible reading, which the data cannot confirm, is that in very remote places the infrastructure is the binding constraint: the ADII reports an Access score 19.4 points below the national average there. Skills cannot make up for a connection that is missing or unreliable. The ADII also finds that network interruptions are far more common outside cities, reaching 30.5% in very remote areas.</p>
+    </div>
+  </section>
+
+  <!-- geography -->
+  <section id="geography">
+    <h2>Where opportunity differs</h2>
+    <p class="deck">Geographic and socioeconomic patterns</p>
+
+    <p class="lede">Place shapes both where schools are and who they serve. This section compares states, then maps the school system itself. The school-level charts use remoteness and the Index of Community Socio-Educational Advantage (ICSEA) as indirect context, not as measures of technology access.</p>
+
+    <h3>Where the schools are</h3>
+    <figure class="chart">
+      <p class="fig-no">Figure 5</p>
+      <div class="vega-host" data-spec="charts/05-school-locations-dot-map.vl.json" role="img" aria-label="Dot map of 9,694 Australian schools, concentrated along the south-east, east and south-west coasts, and sparse across the interior." aria-busy="true"></div>
+      <figcaption class="source">Source: ACARA, School Profile 2025 (school name, suburb, postcode); locality coordinates from the <a href="https://github.com/matthewproctor/australianpostcodes">australianpostcodes</a> dataset (GitHub), joined on postcode and locality (99.3% matched at locality level, the rest at postcode level). Dots are approximate.</figcaption>
+    </figure>
+    <div class="read">
+      <h4>Reading the chart</h4>
+      <p>One dot is one school. Dense clusters follow the population: around Sydney and the east coast, Melbourne and the south-east, Adelaide, and Perth. The interior is left almost blank, with small settlements marked by isolated dots. The map says where school infrastructure exists, which is the geography any national digital strategy must serve. Dot density says nothing about the quality of a school's connection.</p>
+    </div>
+
+    <h3>How states compare on each dimension</h3>
+    <figure class="chart">
+      <p class="fig-no">Figure 6</p>
+      <div class="vega-host" data-spec="charts/06-adii-gap-heatmap.vl.json" role="img" aria-label="Heatmap of ADII score gaps against the national average. The ACT is above on every dimension, Tasmania is below on all three, the Northern Territory is 5.1 points below on Access, and areas outside capital cities are 5.3 points below on Digital Ability." aria-busy="true"></div>
+      <figcaption class="source">Source: Thomas et al. (2025), ADII 2025, Figure 1. Gap = jurisdiction score minus the national score for that dimension (Access 76.8, Affordability 70.3, Digital Ability 73.6).</figcaption>
+    </figure>
+    <div class="read">
+      <h4>Reading the chart</h4>
+      <p>Rows are jurisdictions and the two area types, columns are the three dimensions, and colour shows the signed gap to the national score (blue above, orange below). Tasmania is below the national figure on all three dimensions, with the widest shortfall on Affordability (4.9 points). The Northern Territory has the largest state-level shortfall, 5.1 points on Access, yet scores above the national average on Affordability and Digital Ability, which is why the ADII calls its position a mixed picture.</p>
+      <p>The largest gap on the chart is the 5.3-point shortfall in Digital Ability for the rest of Australia outside capital cities, set against capital cities 2.6 points above. Place matters most for skills and support, not only for infrastructure. As the ADII cautions, remote mining centres are a notable exception, with relatively higher scores because of concentrations of higher-income earners.</p>
+    </div>
+
+    <h3>Students are even more concentrated than schools</h3>
+    <figure class="chart">
+      <p class="fig-no">Figure 7</p>
+      <div class="vega-host" data-spec="charts/07-students-by-remoteness-treemap.vg.json" role="img" aria-label="Treemap of full-time-equivalent students by remoteness and affiliation. Major cities hold 73.6% of students, inner regional 17.1%, outer regional 7.5% and remote plus very remote 1.8%." aria-busy="true"></div>
+      <figcaption class="source">Source: ABS, <em>Schools, 2025</em>, Table 46a (FTE students by ASGS remoteness area, summed across states and territories). Affiliation is government or non-government.</figcaption>
+    </figure>
+    <div class="read">
+      <h4>Reading the chart</h4>
+      <p>Area is proportional to full-time-equivalent students. Nearly three in four students (73.6%) attend school in a major city, and government schools in major cities alone account for 45.5% of all students. Remote and very remote areas together hold 1.8% of students, too few to label as tiles. For comparison, those two classes contain about six per cent of the schools on the map in Figure 5, so these schools are many but small. (The school count comes from ACARA and the student share from the ABS FTE series, which count students differently.)</p>
+      <p>The implication is practical. Small, scattered schools are costly to connect and support, yet they teach few students, so national averages are dominated by the cities and can hide remote disadvantage.</p>
+    </div>
+
+    <h3>Enrolments and advantage across the map</h3>
+    <figure class="chart">
+      <p class="fig-no">Figure 8</p>
+      <div class="vega-host" data-spec="charts/08-enrolment-bubble-map.vl.json" role="img" aria-label="Proportional symbol map. Large circles in Melbourne, Sydney, Perth and south-east Queensland have high mean ICSEA, while small circles across the interior and north have low mean ICSEA." aria-busy="true"></div>
+      <figcaption class="source">Source: ACARA, School Profile 2025 (enrolments, ICSEA), aggregated to 0.75 degree grid cells using approximate school coordinates (see Figure 5). Mean ICSEA is weighted by enrolments; schools without an ICSEA are excluded.</figcaption>
+    </figure>
+    <div class="read">
+      <h4>Reading the chart</h4>
+      <p>Circle area shows how many students attend schools in each grid cell, and colour shows their average school advantage (ICSEA, where about 1000 is the national mean). The two largest cells are Melbourne (about 674,000 students, mean ICSEA 1071) and Sydney (about 597,000, mean ICSEA 1065). Across the interior and the north, cells are tiny and many are coloured orange, meaning lower average advantage and, often, just a handful of students.</p>
+      <p>The map combines two things the system must balance: where most students are, and where advantage is thinnest. Because cells are drawn on a fixed grid and school locations are approximate, treat the pattern as indicative. Individual circles should not be read as precise town boundaries.</p>
+    </div>
+
+  </section>
+
+  <!-- groups -->
+  <section id="groups">
+    <h2>One system, different needs</h2>
+    <p class="deck">Resources, advantage and who is using new tools</p>
+
+    <p class="lede">Schools do not start from the same place. This section looks at three things that bear on whether digital learning is accessible and not merely available: the staffing capacity to support students, the spread of community advantage between schools, and which groups are adopting the newest tools.</p>
+
+    <h3>Capacity to support students</h3>
+    <figure class="chart">
+      <p class="fig-no">Figure 9</p>
+      <div class="vega-host" data-spec="charts/09-staffing-bump-chart.vl.json" role="img" aria-label="Bump chart ranking states by students per teacher from 2015 to 2025. The Northern Territory ranks first every year. Tasmania rises from seventh to second." aria-busy="true"></div>
+      <figcaption class="source">Source: ABS, <em>Schools, 2025</em>, Table 53a (FTE student to FTE teaching staff ratios, all affiliations, all school levels). Ranks computed here; ties broken alphabetically. Australia-wide totals excluded.</figcaption>
+    </figure>
+    <div class="read">
+      <h4>Reading the chart</h4>
+      <p>Each line is a state or territory, ranked each year from fewest students per teacher (rank 1) to most. The Northern Territory is first throughout, with 11.0 students per FTE teacher in 2025. Tasmania, highlighted in orange, climbs from seventh in 2015 to second in 2025, as its ratio falls from 14.1 to 11.8. Western Australia sits at the bottom in 2025 with 13.7, though it too improved by 0.6 over the decade.</p>
+      <p>This is a staffing indicator, not a technology one, and a rank shows relative position rather than the size of a change. It is included because skilled teachers are what turn devices into learning, an area where the ICT results suggest the system is not yet succeeding. Low ratios in small, remote jurisdictions often reflect small schools rather than extra resources.</p>
+    </div>
+
+    <h3>Averages hide wide differences between schools</h3>
+    <figure class="chart">
+      <p class="fig-no">Figure 10</p>
+      <div class="vega-host" data-spec="charts/10-icsea-beeswarm.vg.json" role="img" aria-label="Beeswarm plot of school ICSEA by remoteness. Median ICSEA falls from 1,049 in major cities to 707 in very remote areas, with considerable overlap between the other regions." aria-busy="true"></div>
+      <figcaption class="source">Source: ACARA, School Profile 2025 (ICSEA, sector, remoteness classification). Dots are a random sample of up to 120 schools per remoteness area (seed 3179) to keep the swarm readable; medians use every school with an ICSEA (n = 5,347; 2,328; 1,390; 290; 261).</figcaption>
+    </figure>
+    <div class="read">
+      <h4>Reading the chart</h4>
+      <p>Each dot is a school, grouped by remoteness and coloured by sector, and the dark bar is the median for all schools in that group. Median ICSEA steps down from 1,049 in major cities to 982 in inner regional, about 951 in outer regional and 930 in remote areas, then drops sharply to 707 in very remote areas. The spread within each group is large: major cities contain schools as low as roughly 670 and regional groups include schools above 1,000.</p>
+      <p>Two cautions apply. First, the overlap means remoteness alone does not decide a school's advantage. Second, ICSEA describes school communities, not devices or internet. It becomes relevant here because the national ICT results show continuing gaps between groups of students, and parental education and occupation are among the factors linked with stronger results. Very remote schools have the lowest advantage by a wide margin.</p>
+    </div>
+
+    <h3>Who is using generative AI?</h3>
+    <figure class="chart">
+      <p class="fig-no">Figure 11</p>
+      <div class="vega-host" data-spec="charts/11-genai-diverging-dot-plot.vl.json" role="img" aria-label="Diverging dot plot of generative AI use. Students 78.9%, ages 18 to 34 69.1%, bachelor's degree 62.0%, other language at home 58.8%, against national 45.6%. Lowest are those who left school at Year 10 (4.2%) and those aged 75 and over (10.6%)." aria-busy="true"></div>
+      <figcaption class="source">Source: Thomas et al. (2025), ADII 2025, Case study 1 (based on the 2024 Australian Internet Usage Survey, 3,065 households). Population survey, not limited to school students. The dashed line is the national figure, 45.6%.</figcaption>
+    </figure>
+    <div class="read">
+      <h4>Reading the chart</h4>
+      <p>Each dot shows the share of a group who recently used a generative AI tool, and the stem runs to the national average of 45.6%. Students are the heaviest users (78.9%), followed by 18 to 34 year olds (69.1%), people with a bachelor's degree (62.0%) and people who speak another language at home (58.8%). Below the line sit people with disability (33.9%), First Nations people (36.6%) and people who left school at Year 10 (4.2%).</p>
+      <p>For schools, the useful message is that adoption is outpacing guidance. ACARA's results show students using digital tools heavily while proficiency falls, and the ADII warns that uneven skills could turn new tools into another channel of inequality. A group's low use of AI here is not evidence about school-based access, but it flags who may be left behind as these tools become part of study.</p>
+    </div>
+  </section>
+
+  <!-- change -->
+  <section id="change">
+    <h2>The changing classroom</h2>
+    <p class="deck">Change over time, and the limits of what we can conclude</p>
+
+    <p class="lede">The classroom of 2025 looks very different from that of a decade ago. Digital access has improved: the ADII Access score rose 4.8 points between 2023 and 2025, and Digital Ability rose 8.7 points to 73.6, with large gains among older Australians and people who did not complete school. Over the same period, and in the same national picture, school-age ICT literacy has gone backwards.</p>
+
+    <figure class="chart">
+      <p class="fig-no">Figure 12</p>
+      <div class="vega-host" data-spec="charts/12-ict-connected-scatter.vl.json" role="img" aria-label="Connected scatterplot of Year 6 against Year 10 proficiency. The path moves from 53% and 54% in 2017, to 55% and 46% in 2022, to 50% and 37% in 2025." aria-busy="true"></div>
+      <figcaption class="source">Source: ACARA, NAP-ICT Literacy 2017, 2022 and 2025 (same data as Figure 2, shown here as a joint path). Three observations only; nothing is extrapolated.</figcaption>
+    </figure>
+    <div class="read">
+      <h4>Reading the chart</h4>
+      <p>Where Figure 2 compares years, this chart plots both year levels together, so each point is one assessment round and the path runs from 2017 to 2025. Between 2017 and 2022, Year 6 rose slightly while Year 10 fell sharply. From 2022 to 2025 the path heads down and to the left: Year 6 fell five points and Year 10 nine, nearly twice as far. By 2025 both are below their 2017 levels, with Year 10 down 17 points from 54% to 37%.</p>
+      <p>The shape tells us that the decline is not confined to one age group, and that it is steeper where students are older and more exposed to complex digital tasks. It does not tell us what caused it. The ACS summary of the report notes that students who use productivity applications often tend to score higher, while use of specialist applications is linked with lower scores, which suggests <em>how</em> students use technology may matter more than <em>how much</em>. That is an association from the report, not a result this page can test.</p>
+    </div>
+  </section>
+
+  <!-- conclusion -->
+  <section id="conclusion">
+    <h2>Beyond access</h2>
+
+    <p class="lede">The opening question was whether Australian students have equal opportunities to access and benefit from digital technology. The evidence says opportunity is not equal, and that access, important as it is, is only the first of four conditions.</p>
+
+    <div class="sketch" role="list">
+      <div class="step" role="listitem">
+        <p class="tag">1 · Access</p>
+        <h4>Reliable devices and connections</h4>
+        <p class="ev">Very remote Access is 57.4 against 78.3 in major cities (Fig. 4). 9.7% of Australians are mobile-only.</p>
+        <p class="gap">Gap: no national measure of student device ownership in these data.</p>
+      </div>
+      <div class="step" role="listitem">
+        <p class="tag">2 · Accessibility</p>
+        <h4>Affordable and usable for everyone</h4>
+        <p class="ev">Tasmania sits below the national score on all three dimensions (Fig. 6). Very remote schools have a median ICSEA of 707 (Fig. 10).</p>
+        <p class="gap">Gap: no measure of accessibility for students with disability.</p>
+      </div>
+      <div class="step" role="listitem">
+        <p class="tag">3 · Skills</p>
+        <h4>Confidence and critical use</h4>
+        <p class="ev">Year 10 proficiency is 37% (Fig. 2). Generative AI use ranges from 4.2% to 78.9% across groups (Fig. 11).</p>
+        <p class="gap">Gap: no group breakdown of ICT results was used here.</p>
+      </div>
+      <div class="step" role="listitem">
+        <p class="tag">4 · Effective use</p>
+        <h4>Teachers and purposeful practice</h4>
+        <p class="ev">Student-to-teacher ratios vary across states, with Tasmania improving (Fig. 9). Use of tools varies, not just access.</p>
+        <p class="gap">Gap: how classroom use links to results needs further study.</p>
+      </div>
+    </div>
+    <p class="small"><em>Conclusion sketch: the four conditions for equitable digital education, each tied to the finding that supports it and the evidence gap that remains.</em></p>
+
+    <p>Taken together, four findings stand out. First, <strong>proficiency is falling even as inclusion rises</strong>: Year 10 is at 37% and Year 6 at 50%, so connecting students is not enough. Second, <strong>place matters</strong>: inclusion declines with remoteness, and the very remote Access score is 21 points below the major cities. Third, <strong>students are concentrated, schools are scattered</strong>: nearly three in four students attend school in a major city, but the small remote schools that serve the rest face the thinnest advantage. Fourth, <strong>new tools are spreading unevenly</strong>, with the groups already less connected also less likely to use generative AI.</p>
+
+    <p>The practical reading is that equity in digital education depends on skills, support and teaching as much as on hardware. Priorities that follow from the evidence are reliable and affordable connections in remote and low-income communities, teaching of ICT and AI literacy that is deliberate across year levels, and better data. The most useful new dataset would link device and connectivity measures to school-level outcomes, which would let future work test the questions this report could only pose.</p>
+  </section>
+
+  <!-- references -->
+  <section id="references">
+    <h2>Data sources and references</h2>
+
+    <h3>Datasets Utilised</h3>
+    <ol class="refs">
+      <li>Australian Curriculum, Assessment and Reporting Authority (ACARA). <em>School Profile 2008–2025</em> (Data Access Program). Used for school location, sector, remoteness, ICSEA and enrolments (Figures 1, 5, 8, 10). <a href="https://www.acara.edu.au/contact-us/acara-data-access">acara.edu.au/contact-us/acara-data-access</a></li>
+      <li>Australian Bureau of Statistics. <em>Schools, 2025</em>, Table 46a (FTE students by remoteness) and Table 53a (FTE student to teaching staff ratios). Used for Figures 7 and 9. <a href="https://www.abs.gov.au/statistics/people/education/schools/latest-release">abs.gov.au/statistics/people/education/schools/latest-release</a></li>
+      <li>Thomas, J., McCosker, A., Parkinson, S., Hegarty, K., Featherstone, D., Kennedy, J., Ormond-Parker, L., Morrison, K., Rea, H., &amp; Ganley, L. (2025). <em>Measuring Australia's Digital Divide: 2025 Australian Digital Inclusion Index.</em> ARC Centre of Excellence for Automated Decision-Making and Society, RMIT University, Swinburne University of Technology and Telstra. DOI <a href="https://doi.org/10.60836/mtsq-at22">10.60836/mtsq-at22</a>. Licensed CC BY-NC-SA 4.0. Used for Figures 3, 4, 6 and 11 (published values re-entered as tables; no figure was copied). <a href="https://www.digitalinclusionindex.org.au">digitalinclusionindex.org.au</a></li>
+      <li>ACARA. <em>National Assessment Program - ICT Literacy 2025 Public Report</em> (May 2026) and ACARA news release, May 2026. Used for Figures 2 and 12. <a href="https://nap.edu.au/docs/default-source/nap-sample/nap-ictl-2025-public-report.pdf">nap.edu.au (2025 report)</a>; <a href="https://www.acara.edu.au/news-and-media/news-details">acara.edu.au news</a></li>
+      <li>ACARA. <em>NAP-ICT Literacy 2022</em> media release, for the 2017 and 2022 proficiency percentages. <a href="https://www.acara.edu.au/docs/default-source/media-releases/media-release-latest-data-reveals-digital-skills-amongst-young-australians.pdf">acara.edu.au media release</a></li>
+      <li>Proctor, M. <em>Australian postcodes</em> (locality coordinates), GitHub. Used to place schools approximately. <a href="https://github.com/matthewproctor/australianpostcodes">github.com/matthewproctor/australianpostcodes</a></li>
+      <li>Hogan, R. <em>australian-states</em> (state boundaries, GeoJSON), GitHub, simplified with Mapshaper. <a href="https://github.com/rowanhogan/australian-states">github.com/rowanhogan/australian-states</a></li>
+    </ol>
+
+    <h3>Supporting Reading (Bibliography)</h3>
+    <ol class="refs" start="8">
+      <li>Information Age (ACS). &ldquo;Digital literacy amongst students hits new lows&rdquo; (2026), reporting the 2025 NAP-ICTL sample sizes and application-use associations. <a href="https://ia.acs.org.au/article/2026/digital-literacy-amongst-students-hits-new-lows.html">ia.acs.org.au</a></li>
+      <li>Australian Catholic University. &ldquo;Only 37% of Year 10 students meet our national standards for digital skills&rdquo; (May 2026). <a href="https://www.acu.edu.au/about-acu/news/2026/may/national-standards-for-digital-skills">acu.edu.au</a></li>
+    </ol>
+    <h3>Generative AI acknowledgement</h3>
+    <p class="small">No AI was utilised in the generation of this website.</p>
+  </section>
+
+  <footer>
+    <p>Luke Downward (33656974), FIT3179 Data Visualisation 2, Monash University, 24 October 2026</p>
+  </footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

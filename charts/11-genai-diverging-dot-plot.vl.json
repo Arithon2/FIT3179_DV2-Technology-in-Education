@@ -1,0 +1,243 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Diverging dot plot of recent generative AI use by population group, relative to the national figure of 45.6%.",
+  "title": {
+    "text": [
+      "Generative AI use splits along age, schooling and disability",
+      "lines"
+    ],
+    "subtitle": [
+      "Share who recently used a generative AI tool (%), against the national 45.6%. Population survey, not",
+      "students only. Source: ADII 2025, Case study 1"
+    ]
+  },
+  "width": 500,
+  "height": 440,
+  "config": {
+    "font": "Source Sans 3",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "gridColor": "#e3e8ee",
+      "domainColor": "#b8c2cc",
+      "tickColor": "#b8c2cc",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "legend": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "DM Sans",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#16324f",
+      "subtitleFont": "Source Sans 3",
+      "subtitleColor": "#5b6b7b",
+      "subtitleFontSize": 12.5,
+      "offset": 10
+    },
+    "text": {
+      "font": "Source Sans 3"
+    }
+  },
+  "data": {
+    "url": "processed/genai_groups.csv"
+  },
+  "transform": [
+    {
+      "calculate": "datum.pct - datum.national",
+      "as": "diff"
+    },
+    {
+      "calculate": "datum.diff >= 0 ? 'Above national' : 'Below national'",
+      "as": "dir"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "group",
+      "type": "nominal",
+      "sort": {
+        "field": "pct",
+        "order": "descending"
+      },
+      "axis": {
+        "title": null,
+        "labelFontSize": 12.5,
+        "domain": false,
+        "ticks": false,
+        "labelLimit": 340
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 2.5,
+        "color": "#c5ced8"
+      },
+      "encoding": {
+        "x": {
+          "field": "national",
+          "type": "quantitative"
+        },
+        "x2": {
+          "field": "pct"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 200,
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "pct",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              85
+            ]
+          },
+          "axis": {
+            "title": "Recently used generative AI (%)"
+          }
+        },
+        "color": {
+          "field": "dir",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Above national",
+              "Below national"
+            ],
+            "range": [
+              "#16324f",
+              "#e4572e"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "top",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "group",
+            "title": "Group"
+          },
+          {
+            "field": "pct",
+            "title": "% used"
+          },
+          {
+            "field": "diff",
+            "title": "Points vs national",
+            "format": "+.1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": -15,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "color": "#3b4a5a"
+      },
+      "encoding": {
+        "x": {
+          "field": "pct",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "pct",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 45.6
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          4,
+          4
+        ],
+        "color": "#5b6b7b"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        },
+        "y": {
+          "value": 0
+        },
+        "y2": {
+          "value": 440
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 46.6,
+            "y": "Aged 65-74"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontStyle": "italic",
+        "fontSize": 12.5,
+        "color": "#5b6b7b",
+        "fontWeight": 600,
+        "text": [
+          "National average",
+          "45.6%"
+        ],
+        "baseline": "middle"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "y",
+          "type": "nominal"
+        }
+      }
+    }
+  ]
+}

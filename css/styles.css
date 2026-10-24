@@ -1,0 +1,125 @@
+/* Report styles. Pure.css handles the grid; everything else is here. */
+:root {
+  --navy: #16324f;
+  --accent: #e4572e;
+  --teal: #2a9d8f;
+  --ink: #2b3a49;
+  --muted: #5b6b7b;
+  --line: #dde3ea;
+  --paper: #ffffff;
+  --wash: #f4f6f9;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* centred 850px column with 50px padding */
+.report {
+  box-sizing: content-box;
+  width: 850px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 50px 80px;
+}
+
+h1, h2, h3, h4, .eyebrow, .stat, .toc a, figcaption .fig-no {
+  font-family: "DM Sans", system-ui, sans-serif;
+}
+
+/* masthead */
+.masthead { padding: 70px 0 34px; border-bottom: 3px solid var(--navy); }
+.eyebrow {
+  margin: 0 0 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  /* color: var(--accent); */
+}
+.masthead h1 { margin: 0; font-size: 3.1rem; line-height: 1.08; color: var(--navy); letter-spacing: -0.02em; }
+.masthead .subtitle { margin: 12px 0 0; font-size: 1.45rem; font-weight: 500; color: var(--muted); font-family: "DM Sans", sans-serif; }
+.masthead .standfirst { margin: 22px 0 0; font-size: 1.15rem; max-width: 36em; }
+.byline { margin: 22px 0 0; font-size: 0.9rem; color: var(--muted); }
+
+/* headline finding */
+.finding {
+  margin: 34px 0 0;
+  padding: 26px 30px;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 6px;
+}
+.finding .eyebrow { color: #b8c7d6; margin-bottom: 6px; }
+.finding .stat { font-size: 4.2rem; font-weight: 700; line-height: 1; margin: 0; }
+.finding p { margin: 6px 0 0; }
+.finding .src { font-size: 0.82rem; color: #b8c7d6; margin-top: 12px; }
+
+/* contents */
+.toc { margin: 30px 0 10px; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.toc a { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--navy); text-decoration: none; border-bottom: 2px solid transparent; }
+.toc a:hover { border-color: var(--accent); }
+
+/* sections */
+section { margin-top: 64px; }
+section > .sec-no { font-family: "DM Sans", sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 0; }
+section > h2 { margin: 4px 0 6px; font-size: 2rem; line-height: 1.2; color: var(--navy); letter-spacing: -0.01em; }
+section > .deck { margin: 0 0 22px; color: var(--muted); font-size: 1.1rem; }
+h3 { margin: 38px 0 6px; font-size: 1.25rem; color: var(--navy); }
+p { margin: 0 0 1.1em; }
+.lede::first-line { font-weight: 600; }
+
+/* figures */
+figure.chart { margin: 34px 0 6px; padding: 0; }
+figure.chart .fig-no { margin: 0 0 6px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.vega-host { width: 100%; min-height: 200px; }
+.vega-host .vega-embed { display: block; width: 100%; }
+.vega-host svg { display: block; margin: 0 auto; height: auto; }
+.vega-host .vega-actions a { font-family: "DM Sans", sans-serif; }
+figcaption.source { margin: 8px 0 0; padding-top: 8px; border-top: 1px solid var(--line); font-size: 0.82rem; line-height: 1.5; color: var(--muted); }
+figcaption.source a { color: var(--muted); }
+
+.read { margin: 18px 0 0; }
+.read h4 { margin: 0 0 4px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); }
+.read p:last-child { margin-bottom: 0; }
+
+/* chart pairs / triples on the pure grid */
+.pair, .triple { margin: 28px -10px 8px; }
+.pair [class*="pure-u"], .triple [class*="pure-u"] { box-sizing: border-box; padding: 0 10px; }
+.pair h3, .triple h3 { margin-top: 0; }
+.small { font-size: 0.93rem; line-height: 1.6; }
+
+/* conclusion sketch */
+.sketch { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 28px 0 8px; }
+.sketch .step { border: 1px solid var(--line); border-top: 5px solid var(--navy); border-radius: 4px; padding: 14px 14px 12px; background: #fff; }
+.sketch .step:nth-child(2) { border-top-color: var(--teal); }
+.sketch .step:nth-child(3) { border-top-color: #e9a23b; }
+.sketch .step:nth-child(4) { border-top-color: var(--accent); }
+.sketch .step h4 { margin: 0 0 6px; font-size: 1rem; color: var(--navy); }
+.sketch .step .ev { font-size: 0.88rem; line-height: 1.5; margin: 0 0 8px; }
+.sketch .step .gap { font-size: 0.8rem; line-height: 1.45; color: var(--muted); margin: 0; }
+.sketch .step .tag { font-family: "DM Sans", sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin: 0 0 4px; }
+
+/* references and notes */
+.refs { font-size: 0.92rem; line-height: 1.55; }
+.refs li { margin-bottom: 0.7em; }
+.refs a { word-break: break-word; }
+footer { margin-top: 60px; padding-top: 18px; border-top: 3px solid var(--navy); font-size: 0.88rem; color: var(--muted); }
+
+@media (max-width: 950px) {
+  .report { padding-left: 20px; padding-right: 20px; }
+  .masthead h1 { font-size: 2.3rem; }
+  .sketch { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  body { font-size: 17px; }
+  .sketch { grid-template-columns: 1fr; }
+  .finding .stat { font-size: 3.2rem; }
+}

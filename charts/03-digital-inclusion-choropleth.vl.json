@@ -1,0 +1,216 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Choropleth map of the 2025 Australian Digital Inclusion Index total score by state and territory.",
+  "title": {
+    "text": [
+      "Digital inclusion peaks in the ACT and bottoms out in",
+      "Tasmania"
+    ],
+    "subtitle": [
+      "ADII 2025 total score (0-100); national score 73.6. Whole-population measure, not a school measure.",
+      "Source: ADII 2025 (RMIT, Swinburne, Telstra)"
+    ]
+  },
+  "width": 740,
+  "height": 575,
+  "config": {
+    "font": "Source Sans 3",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "gridColor": "#e3e8ee",
+      "domainColor": "#b8c2cc",
+      "tickColor": "#b8c2cc",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "legend": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "DM Sans",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#16324f",
+      "subtitleFont": "Source Sans 3",
+      "subtitleColor": "#5b6b7b",
+      "subtitleFontSize": 12.5,
+      "offset": 10
+    },
+    "text": {
+      "font": "Source Sans 3"
+    }
+  },
+  "projection": {
+    "type": "mercator",
+    "center": [
+      134,
+      -28.1
+    ],
+    "scale": 800
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "processed/au_states.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.STATE_NAME",
+          "from": {
+            "data": {
+              "url": "processed/adii_state.csv"
+            },
+            "key": "state_name",
+            "fields": [
+              "code",
+              "index",
+              "access",
+              "affordability",
+              "ability"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "color": {
+          "field": "index",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              69,
+              80
+            ],
+            "range": [
+              "#dbe7f3",
+              "#16324f"
+            ]
+          },
+          "legend": {
+            "title": "ADII total score",
+            "orient": "bottom-left",
+            "direction": "horizontal",
+            "gradientLength": 180
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.STATE_NAME",
+            "title": "Jurisdiction"
+          },
+          {
+            "field": "index",
+            "title": "Total index"
+          },
+          {
+            "field": "access",
+            "title": "Access"
+          },
+          {
+            "field": "affordability",
+            "title": "Affordability"
+          },
+          {
+            "field": "ability",
+            "title": "Digital Ability"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "processed/adii_state.csv"
+      },
+      "transform": [
+        {
+          "calculate": "datum.code + ' ' + format(datum.index,'.1f')",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontWeight": 700,
+        "fontSize": 12.5
+      },
+      "encoding": {
+        "longitude": {
+          "field": "label_lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "label_lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lab"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.index > 73 && datum.code != 'ACT'",
+            "value": "white"
+          },
+          "value": "#16324f"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 149.6,
+            "lat": -43.2,
+            "t": "Lowest: Tasmania"
+          },
+          {
+            "lon": 150.4,
+            "lat": -38.4,
+            "t": "Highest: ACT"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontStyle": "italic",
+        "fontSize": 12.5,
+        "color": "#e4572e",
+        "fontWeight": 600
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    }
+  ]
+}

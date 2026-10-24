@@ -1,0 +1,285 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "Beeswarm plot of school ICSEA scores by remoteness area, using a sample of up to 120 schools per area.",
+  "width": 620,
+  "height": 420,
+  "padding": 5,
+  "autosize": "pad",
+  "title": {
+    "text": [
+      "Very remote schools sit far below the rest on socio-",
+      "educational advantage"
+    ],
+    "subtitle": [
+      "Each dot = one school (random sample of up to 120 per area, seed 3179). Line = median of all schools",
+      "in the area. Source: ACARA School Profile 2025 (ICSEA)"
+    ],
+    "anchor": "start",
+    "font": "DM Sans",
+    "fontSize": 17,
+    "fontWeight": 700,
+    "color": "#16324f",
+    "subtitleFont": "Source Sans 3",
+    "subtitleFontSize": 12.5,
+    "subtitleColor": "#5b6b7b",
+    "offset": 10
+  },
+  "data": [
+    {
+      "name": "schools",
+      "url": "processed/icsea_beeswarm_sample.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "icsea": "number",
+          "enrolments": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "scale('x', datum.remoteness) + bandwidth('x') / 2",
+          "as": "cx"
+        },
+        {
+          "type": "formula",
+          "expr": "scale('y', datum.icsea)",
+          "as": "cy"
+        },
+        {
+          "type": "force",
+          "iterations": 300,
+          "static": true,
+          "forces": [
+            {
+              "force": "collide",
+              "iterations": 3,
+              "radius": 3.6
+            },
+            {
+              "force": "x",
+              "x": {
+                "field": "cx"
+              },
+              "strength": 0.08
+            },
+            {
+              "force": "y",
+              "y": {
+                "field": "cy"
+              },
+              "strength": 0.9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "medians",
+      "url": "processed/icsea_medians.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "median": "number",
+          "count": "number"
+        }
+      }
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "type": "band",
+      "domain": [
+        "Major Cities",
+        "Inner Regional",
+        "Outer Regional",
+        "Remote",
+        "Very Remote"
+      ],
+      "range": "width",
+      "paddingInner": 0.15,
+      "paddingOuter": 0.1
+    },
+    {
+      "name": "y",
+      "type": "linear",
+      "domain": [
+        450,
+        1300
+      ],
+      "range": "height",
+      "zero": false,
+      "nice": false
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": [
+        "Government",
+        "Catholic",
+        "Independent"
+      ],
+      "range": [
+        "#16324f",
+        "#2a9d8f",
+        "#e4572e"
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "orient": "left",
+      "scale": "y",
+      "title": "ICSEA (national mean about 1000)",
+      "grid": true,
+      "gridColor": "#e3e8ee",
+      "domain": false,
+      "tickCount": 8,
+      "titleFontWeight": 600,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a"
+    },
+    {
+      "orient": "bottom",
+      "scale": "x",
+      "ticks": false,
+      "domain": false,
+      "labelFontSize": 13,
+      "labelPadding": 6,
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a"
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color",
+      "orient": "top-right",
+      "direction": "horizontal",
+      "title": "Sector",
+      "symbolType": "circle",
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "offset": -20
+    }
+  ],
+  "marks": [
+    {
+      "type": "rule",
+      "from": {
+        "data": "medians"
+      },
+      "encode": {
+        "enter": {
+          "stroke": {
+            "value": "#16324f"
+          },
+          "strokeWidth": {
+            "value": 3
+          },
+          "strokeCap": {
+            "value": "round"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "scale('x', datum.remoteness) + 6"
+          },
+          "x2": {
+            "signal": "scale('x', datum.remoteness) + bandwidth('x') - 6"
+          },
+          "y": {
+            "signal": "scale('y', datum.median)"
+          },
+          "tooltip": {
+            "signal": "datum.remoteness + ' median ICSEA: ' + datum.median + ' (' + format(datum.count, ',') + ' schools)'"
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {
+        "data": "schools"
+      },
+      "encode": {
+        "enter": {
+          "size": {
+            "value": 36
+          },
+          "fillOpacity": {
+            "value": 0.75
+          },
+          "stroke": {
+            "value": "white"
+          },
+          "strokeWidth": {
+            "value": 0.5
+          },
+          "tooltip": {
+            "signal": "{'School': datum.name, 'State': datum.state, 'Sector': datum.sector, 'ICSEA': datum.icsea, 'Enrolments': datum.enrolments}"
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "fill": {
+            "scale": "color",
+            "field": "sector"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "font": {
+            "value": "Source Sans 3"
+          },
+          "fontSize": {
+            "value": 12.5
+          },
+          "fontStyle": {
+            "value": "italic"
+          },
+          "fontWeight": {
+            "value": 600
+          },
+          "fill": {
+            "value": "#e4572e"
+          },
+          "align": {
+            "value": "left"
+          }
+        },
+        "update": {
+          "x": {
+            "value": 8
+          },
+          "y": {
+            "signal": "scale('y', 540)"
+          },
+          "text": {
+            "value": [
+              "Median ICSEA: 707 in Very Remote schools",
+              "against 1,049 in Major Cities schools"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

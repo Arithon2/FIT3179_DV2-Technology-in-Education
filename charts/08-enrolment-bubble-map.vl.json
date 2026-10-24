@@ -1,0 +1,232 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Proportional symbol map of student enrolments in 0.75 degree grid cells, coloured by enrolment-weighted mean ICSEA.",
+  "title": {
+    "text": [
+      "Most students live where school advantage is highest; remote",
+      "cells run lower"
+    ],
+    "subtitle": [
+      "Circle area = enrolments in each 0.75 degree cell; colour = enrolment-weighted mean ICSEA (national",
+      "mean about 1000). Source: ACARA School Profile 2025"
+    ]
+  },
+  "width": 740,
+  "height": 575,
+  "config": {
+    "font": "Source Sans 3",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "gridColor": "#e3e8ee",
+      "domainColor": "#b8c2cc",
+      "tickColor": "#b8c2cc",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "legend": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "DM Sans",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#16324f",
+      "subtitleFont": "Source Sans 3",
+      "subtitleColor": "#5b6b7b",
+      "subtitleFontSize": 12.5,
+      "offset": 10
+    },
+    "text": {
+      "font": "Source Sans 3"
+    }
+  },
+  "projection": {
+    "type": "mercator",
+    "center": [
+      134,
+      -28.1
+    ],
+    "scale": 800
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "processed/au_states.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e6eaef",
+        "stroke": "white",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "data": {
+        "url": "processed/enrolment_grid.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "opacity": 0.82,
+        "stroke": "white",
+        "strokeWidth": 0.6
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "enrolments",
+          "type": "quantitative",
+          "scale": {
+            "type": "linear",
+            "zero": true,
+            "range": [
+              8,
+              3600
+            ]
+          },
+          "legend": {
+            "title": "Students",
+            "orient": "bottom-left",
+            "format": ",.0f",
+            "values": [
+              10000,
+              100000,
+              600000
+            ]
+          }
+        },
+        "color": {
+          "field": "mean_icsea",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              800,
+              1000,
+              1100
+            ],
+            "range": [
+              "#e4572e",
+              "#f2efe6",
+              "#16324f"
+            ]
+          },
+          "legend": {
+            "title": "Mean ICSEA",
+            "orient": "bottom-left",
+            "direction": "horizontal",
+            "gradientLength": 130
+          }
+        },
+        "tooltip": [
+          {
+            "field": "enrolments",
+            "format": ",",
+            "title": "Students"
+          },
+          {
+            "field": "schools",
+            "title": "Schools"
+          },
+          {
+            "field": "mean_icsea",
+            "title": "Mean ICSEA"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "processed/enrolment_grid.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.enrolments > 500000"
+        },
+        {
+          "calculate": "format(datum.enrolments/1000,',.0f') + 'k students'",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 24,
+        "fontWeight": 700,
+        "fontSize": 12.5,
+        "color": "#16324f"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lab"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 126.5,
+            "lat": -37.8,
+            "t": [
+              "Tiny circles across the interior:",
+              "few students, lower ICSEA"
+            ]
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontStyle": "italic",
+        "fontSize": 12.5,
+        "color": "#e4572e",
+        "fontWeight": 600
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    }
+  ]
+}

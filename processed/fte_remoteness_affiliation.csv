@@ -1,0 +1,17 @@
+id,parent,name,value,share
+All students,,All students,,
+Major City,All students,Major City,,73.61
+Inner Regional,All students,Inner Regional,,17.11
+Outer Regional,All students,Outer Regional,,7.53
+Remote,All students,Remote,,1.06
+Very Remote,All students,Very Remote,,0.69
+Inner Regional|Government,Inner Regional,Government,441682.0,10.63
+Inner Regional|Non-Government,Inner Regional,Non-Government,269338.0,6.48
+Major City|Government,Major City,Government,1891375.0,45.52
+Major City|Non-Government,Major City,Non-Government,1167279.0,28.09
+Outer Regional|Government,Outer Regional,Government,216549.0,5.21
+Outer Regional|Non-Government,Outer Regional,Non-Government,96206.0,2.32
+Remote|Government,Remote,Government,33333.0,0.8
+Remote|Non-Government,Remote,Non-Government,10636.0,0.26
+Very Remote|Government,Very Remote,Government,25169.0,0.61
+Very Remote|Non-Government,Very Remote,Non-Government,3460.0,0.08

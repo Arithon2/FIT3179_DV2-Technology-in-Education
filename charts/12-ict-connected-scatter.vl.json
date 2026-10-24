@@ -1,0 +1,229 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Connected scatterplot of the share of Year 6 against Year 10 students at the proficient ICT literacy standard in 2017, 2022 and 2025.",
+  "title": {
+    "text": [
+      "Year 10 fell nearly twice as far as Year 6, and both are now",
+      "below 2017"
+    ],
+    "subtitle": [
+      "Share at the proficient standard (%), path ordered by assessment year. Source: ACARA NAP-ICT",
+      "Literacy 2017, 2022 and 2025"
+    ]
+  },
+  "width": 540,
+  "height": 400,
+  "config": {
+    "font": "Source Sans 3",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "gridColor": "#e3e8ee",
+      "domainColor": "#b8c2cc",
+      "tickColor": "#b8c2cc",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "legend": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "DM Sans",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#16324f",
+      "subtitleFont": "Source Sans 3",
+      "subtitleColor": "#5b6b7b",
+      "subtitleFontSize": 12.5,
+      "offset": 10
+    },
+    "text": {
+      "font": "Source Sans 3"
+    }
+  },
+  "data": {
+    "url": "processed/ictl.csv"
+  },
+  "transform": [
+    {
+      "calculate": "datum.level == 'Year 6' ? datum.proficient_pct : null",
+      "as": "y6"
+    },
+    {
+      "calculate": "datum.level == 'Year 10' ? datum.proficient_pct : null",
+      "as": "y10"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "max",
+          "field": "y6",
+          "as": "y6"
+        },
+        {
+          "op": "max",
+          "field": "y10",
+          "as": "y10"
+        }
+      ],
+      "groupby": [
+        "year"
+      ]
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "y6",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          46,
+          58
+        ]
+      },
+      "axis": {
+        "title": "Year 6 proficient (%)"
+      }
+    },
+    "y": {
+      "field": "y10",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          32,
+          58
+        ]
+      },
+      "axis": {
+        "title": "Year 10 proficient (%)"
+      }
+    },
+    "order": {
+      "field": "year",
+      "type": "quantitative"
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5,
+        "color": "#9aa5b1"
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 160,
+        "opacity": 1
+      },
+      "encoding": {
+        "color": {
+          "field": "year",
+          "type": "ordinal",
+          "scale": {
+            "range": [
+              "#9aa5b1",
+              "#2a9d8f",
+              "#e4572e"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "y6",
+            "title": "Year 6 (%)"
+          },
+          {
+            "field": "y10",
+            "title": "Year 10 (%)"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 12,
+        "dy": -8,
+        "fontWeight": 700,
+        "fontSize": 13
+      },
+      "encoding": {
+        "text": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "color": {
+          "field": "year",
+          "type": "ordinal",
+          "scale": {
+            "range": [
+              "#9aa5b1",
+              "#2a9d8f",
+              "#e4572e"
+            ]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 50.2,
+            "y": 41,
+            "t": [
+              "2022 to 2025: Year 6 down 5 pts,",
+              "Year 10 down 9 pts"
+            ]
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontStyle": "italic",
+        "fontSize": 12.5,
+        "color": "#e4572e",
+        "fontWeight": 600
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        },
+        "order": {
+          "value": null
+        }
+      }
+    }
+  ]
+}

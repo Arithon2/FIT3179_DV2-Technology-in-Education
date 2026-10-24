@@ -1,0 +1,31 @@
+group,dimension,score,national,gap
+ACT,Access,80.9,76.8,4.1
+ACT,Affordability,78.0,70.3,7.7
+ACT,Digital Ability,79.6,73.6,6.0
+VIC,Access,77.5,76.8,0.7
+VIC,Affordability,70.5,70.3,0.2
+VIC,Digital Ability,74.3,73.6,0.7
+NSW,Access,77.0,76.8,0.2
+NSW,Affordability,71.1,70.3,0.8
+NSW,Digital Ability,73.8,73.6,0.2
+WA,Access,77.1,76.8,0.3
+WA,Affordability,70.8,70.3,0.5
+WA,Digital Ability,73.7,73.6,0.1
+QLD,Access,76.3,76.8,-0.5
+QLD,Affordability,69.3,70.3,-1.0
+QLD,Digital Ability,73.0,73.6,-0.6
+NT,Access,71.7,76.8,-5.1
+NT,Affordability,71.9,70.3,1.6
+NT,Digital Ability,73.7,73.6,0.1
+SA,Access,75.7,76.8,-1.1
+SA,Affordability,66.9,70.3,-3.4
+SA,Digital Ability,71.3,73.6,-2.3
+TAS,Access,73.0,76.8,-3.8
+TAS,Affordability,65.4,70.3,-4.9
+TAS,Digital Ability,69.7,73.6,-3.9
+Capital cities,Access,78.3,76.8,1.5
+Capital cities,Affordability,72.0,70.3,1.7
+Capital cities,Digital Ability,76.2,73.6,2.6
+Rest of Australia,Access,73.8,76.8,-3.0
+Rest of Australia,Affordability,66.6,70.3,-3.7
+Rest of Australia,Digital Ability,68.3,73.6,-5.3

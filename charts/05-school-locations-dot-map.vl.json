@@ -1,0 +1,168 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Dot distribution map of 9,694 Australian school locations in 2025.",
+  "title": {
+    "text": [
+      "Schools follow people: they cluster on the south-east and",
+      "Perth coasts"
+    ],
+    "subtitle": [
+      "One dot = one school (9,694 of 9,755). Locations are locality centroids, so dots are approximate.",
+      "Source: ACARA School Profile 2025; locality coordinates from australianpostcodes (GitHub)"
+    ]
+  },
+  "width": 740,
+  "height": 575,
+  "config": {
+    "font": "Source Sans 3",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "gridColor": "#e3e8ee",
+      "domainColor": "#b8c2cc",
+      "tickColor": "#b8c2cc",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "legend": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "DM Sans",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#16324f",
+      "subtitleFont": "Source Sans 3",
+      "subtitleColor": "#5b6b7b",
+      "subtitleFontSize": 12.5,
+      "offset": 10
+    },
+    "text": {
+      "font": "Source Sans 3"
+    }
+  },
+  "projection": {
+    "type": "mercator",
+    "center": [
+      134,
+      -28.1
+    ],
+    "scale": 800
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "processed/au_states.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e6eaef",
+        "stroke": "white",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "data": {
+        "url": "processed/schools_2025.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "size": 9,
+        "opacity": 0.35,
+        "color": "#16324f"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "title": "School"
+          },
+          {
+            "field": "state",
+            "title": "State"
+          },
+          {
+            "field": "sector",
+            "title": "Sector"
+          },
+          {
+            "field": "remoteness",
+            "title": "Remoteness"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 154.3,
+            "lat": -34.2,
+            "t": "Sydney basin"
+          },
+          {
+            "lon": 145.0,
+            "lat": -39.6,
+            "t": "Melbourne"
+          },
+          {
+            "lon": 112.2,
+            "lat": -33.6,
+            "t": "Perth"
+          },
+          {
+            "lon": 122.5,
+            "lat": -23.0,
+            "t": "Few schools across the arid interior"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontStyle": "italic",
+        "fontSize": 12.5,
+        "color": "#e4572e",
+        "fontWeight": 600
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    }
+  ]
+}

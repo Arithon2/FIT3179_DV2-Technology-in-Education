@@ -1,0 +1,270 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Bump chart ranking states and territories by FTE students per FTE teacher from 2015 to 2025.",
+  "title": {
+    "text": [
+      "Tasmania climbed from seventh to second on students per",
+      "teacher"
+    ],
+    "subtitle": [
+      "Rank 1 = fewest FTE students per FTE teacher (all schools, all levels); ties broken alphabetically.",
+      "Source: ABS Schools 2025, Table 53a"
+    ]
+  },
+  "width": 560,
+  "height": 400,
+  "config": {
+    "font": "Source Sans 3",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "gridColor": "#e3e8ee",
+      "domainColor": "#b8c2cc",
+      "tickColor": "#b8c2cc",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "legend": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "DM Sans",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#16324f",
+      "subtitleFont": "Source Sans 3",
+      "subtitleColor": "#5b6b7b",
+      "subtitleFontSize": 12.5,
+      "offset": 10
+    },
+    "text": {
+      "font": "Source Sans 3"
+    }
+  },
+  "padding": {
+    "left": 40,
+    "right": 40,
+    "top": 5,
+    "bottom": 5
+  },
+  "data": {
+    "url": "processed/student_teacher_ratio_rank.csv"
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "axis": {
+        "title": null,
+        "labelAngle": 0,
+        "grid": false,
+        "domain": false
+      }
+    },
+    "y": {
+      "field": "rank",
+      "type": "quantitative",
+      "scale": {
+        "reverse": true,
+        "domain": [
+          0.5,
+          9.5
+        ]
+      },
+      "axis": null
+    },
+    "detail": {
+      "field": "state",
+      "type": "nominal"
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "opacity": 0.9,
+        "interpolate": "monotone"
+      },
+      "encoding": {
+        "color": {
+          "condition": [
+            {
+              "test": "datum.state == 'Tas.'",
+              "value": "#e4572e"
+            },
+            {
+              "test": "datum.state == 'NT'",
+              "value": "#2a9d8f"
+            }
+          ],
+          "value": "#9aa5b1"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 230,
+        "opacity": 1
+      },
+      "encoding": {
+        "color": {
+          "condition": [
+            {
+              "test": "datum.state == 'Tas.'",
+              "value": "#e4572e"
+            },
+            {
+              "test": "datum.state == 'NT'",
+              "value": "#2a9d8f"
+            }
+          ],
+          "value": "#9aa5b1"
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "title": "State"
+          },
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "rank",
+            "title": "Rank"
+          },
+          {
+            "field": "ratio",
+            "title": "Students per teacher"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "color": "white",
+        "fontSize": 11,
+        "fontWeight": 700
+      },
+      "encoding": {
+        "text": {
+          "field": "rank",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == 2025"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 14,
+        "fontWeight": 700,
+        "fontSize": 12.5
+      },
+      "encoding": {
+        "text": {
+          "field": "state"
+        },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.state == 'Tas.'",
+              "value": "#e4572e"
+            },
+            {
+              "test": "datum.state == 'NT'",
+              "value": "#2a9d8f"
+            }
+          ],
+          "value": "#9aa5b1"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == 2015"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -14,
+        "fontWeight": 700,
+        "fontSize": 12.5
+      },
+      "encoding": {
+        "text": {
+          "field": "state"
+        },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.state == 'Tas.'",
+              "value": "#e4572e"
+            },
+            {
+              "test": "datum.state == 'NT'",
+              "value": "#2a9d8f"
+            }
+          ],
+          "value": "#9aa5b1"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": "2015",
+            "rank": 9.0,
+            "t": "Tas.: 14.1 to 11.8 students per FTE teacher, 2015 to 2025"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontStyle": "italic",
+        "fontSize": 12.5,
+        "color": "#e4572e",
+        "fontWeight": 600,
+        "dx": -6
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    }
+  ]
+}

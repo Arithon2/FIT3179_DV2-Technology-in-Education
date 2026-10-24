@@ -1,0 +1,330 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "Treemap of full-time-equivalent students in 2025 by remoteness area and school affiliation.",
+  "width": 740,
+  "height": 420,
+  "padding": {
+    "top": 5,
+    "left": 5,
+    "right": 5,
+    "bottom": 30
+  },
+  "autosize": "none",
+  "title": {
+    "text": [
+      "Nearly three in four students attend school in a major city"
+    ],
+    "subtitle": [
+      "Area = FTE students, 2025; % = share of all FTE students. Source: ABS Schools 2025, Table 46a"
+    ],
+    "anchor": "start",
+    "font": "DM Sans",
+    "fontSize": 17,
+    "fontWeight": 700,
+    "color": "#16324f",
+    "subtitleFont": "Source Sans 3",
+    "subtitleFontSize": 12.5,
+    "subtitleColor": "#5b6b7b",
+    "offset": 10
+  },
+  "data": [
+    {
+      "name": "tree",
+      "url": "processed/fte_remoteness_affiliation.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "value": "number",
+          "share": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum.parent === '' ? null : datum.parent",
+          "as": "parent"
+        },
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "treemap",
+          "field": "value",
+          "sort": {
+            "field": "value",
+            "order": "descending"
+          },
+          "method": "squarify",
+          "ratio": 1.4,
+          "round": true,
+          "paddingInner": 2,
+          "paddingOuter": 3,
+          "paddingTop": 20,
+          "size": [
+            {
+              "signal": "width"
+            },
+            {
+              "signal": "height"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "groups",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.depth === 1"
+        }
+      ]
+    },
+    {
+      "name": "leaves",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.depth === 2"
+        }
+      ]
+    },
+    {
+      "name": "remotesum",
+      "source": "groups",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.name==='Remote'||datum.name==='Very Remote'"
+        },
+        {
+          "type": "aggregate",
+          "fields": [
+            "share"
+          ],
+          "ops": [
+            "sum"
+          ],
+          "as": [
+            "s"
+          ]
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": [
+        "Major City",
+        "Inner Regional",
+        "Outer Regional",
+        "Remote",
+        "Very Remote"
+      ],
+      "range": [
+        "#16324f",
+        "#2a6f97",
+        "#2a9d8f",
+        "#e9a23b",
+        "#e4572e"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": {
+        "data": "groups"
+      },
+      "encode": {
+        "enter": {
+          "fill": {
+            "scale": "color",
+            "field": "name"
+          },
+          "fillOpacity": {
+            "value": 0.18
+          },
+          "stroke": {
+            "scale": "color",
+            "field": "name"
+          },
+          "strokeWidth": {
+            "value": 1.5
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x0"
+          },
+          "x2": {
+            "field": "x1"
+          },
+          "y": {
+            "field": "y0"
+          },
+          "y2": {
+            "field": "y1"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "stroke": {
+            "value": "white"
+          },
+          "strokeWidth": {
+            "value": 1
+          },
+          "tooltip": {
+            "signal": "datum.parent + ' | ' + datum.name + ': ' + format(datum.value, ',') + ' FTE students (' + datum.share + '% of all)'"
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x0"
+          },
+          "x2": {
+            "field": "x1"
+          },
+          "y": {
+            "field": "y0"
+          },
+          "y2": {
+            "field": "y1"
+          },
+          "fill": {
+            "scale": "color",
+            "field": "parent"
+          },
+          "fillOpacity": {
+            "signal": "datum.name === 'Government' ? 0.95 : 0.6"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "fontSize": {
+            "value": 12.5
+          },
+          "fontWeight": {
+            "value": 600
+          },
+          "fill": {
+            "value": "white"
+          },
+          "baseline": {
+            "value": "top"
+          },
+          "font": {
+            "value": "Source Sans 3"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "datum.x0 + 8"
+          },
+          "y": {
+            "signal": "datum.y0 + 7"
+          },
+          "text": {
+            "signal": "(datum.x1 - datum.x0) > 115 && (datum.y1 - datum.y0) > 34 ? datum.name + ' ' + format(datum.share, '.1f') + '%' : ''"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "groups"
+      },
+      "encode": {
+        "enter": {
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": 700
+          },
+          "baseline": {
+            "value": "top"
+          },
+          "font": {
+            "value": "DM Sans"
+          },
+          "fill": {
+            "value": "#16324f"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "datum.x0 + 5"
+          },
+          "y": {
+            "signal": "datum.y0 + 4"
+          },
+          "text": {
+            "signal": "(datum.x1 - datum.x0) > 95 ? datum.name + ' (' + format(datum.share, '.1f') + '%)' : ''"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "fontSize": {
+            "value": 12.5
+          },
+          "fontStyle": {
+            "value": "italic"
+          },
+          "fontWeight": {
+            "value": 600
+          },
+          "fill": {
+            "value": "#e4572e"
+          },
+          "font": {
+            "value": "Source Sans 3"
+          },
+          "align": {
+            "value": "right"
+          },
+          "baseline": {
+            "value": "bottom"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "width"
+          },
+          "y": {
+            "signal": "height + 22"
+          },
+          "text": {
+            "signal": "'Remote + Very Remote together: ' + format(data('remotesum')[0].s, '.1f') + '% of students (tiles too small to label; see tooltips)'"
+          }
+        }
+      }
+    }
+  ]
+}

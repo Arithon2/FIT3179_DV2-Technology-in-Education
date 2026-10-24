@@ -1,0 +1,275 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Proportional circles showing 2025 enrolments in government, Catholic and independent schools.",
+  "title": {
+    "text": [
+      "Government schools teach almost two in three Australian",
+      "students"
+    ],
+    "subtitle": [
+      "Circle area = 2025 student enrolments. Source: ACARA School Profile 2025 (9,694 schools with a",
+      "mappable location)"
+    ]
+  },
+  "width": 620,
+  "height": 330,
+  "config": {
+    "font": "Source Sans 3",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "gridColor": "#e3e8ee",
+      "domainColor": "#b8c2cc",
+      "tickColor": "#b8c2cc",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "legend": {
+      "labelFont": "Source Sans 3",
+      "titleFont": "DM Sans",
+      "labelColor": "#3b4a5a",
+      "titleColor": "#3b4a5a",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "DM Sans",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "anchor": "start",
+      "color": "#16324f",
+      "subtitleFont": "Source Sans 3",
+      "subtitleColor": "#5b6b7b",
+      "subtitleFontSize": 12.5,
+      "offset": 10
+    },
+    "text": {
+      "font": "Source Sans 3"
+    }
+  },
+  "data": {
+    "url": "processed/sector_summary.csv"
+  },
+  "transform": [
+    {
+      "calculate": "format(datum.enrolments/1000000,'.2f') + ' million students'",
+      "as": "lab1"
+    },
+    {
+      "calculate": "format(datum.schools,',') + ' schools'",
+      "as": "lab2"
+    },
+    {
+      "calculate": "'Average campus: ' + format(datum.avg_size,',')",
+      "as": "lab3"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "sector",
+      "type": "nominal",
+      "sort": [
+        "Government",
+        "Catholic",
+        "Independent"
+      ],
+      "axis": {
+        "title": null,
+        "labelFontSize": 14,
+        "labelPadding": 6,
+        "labelAngle": 0,
+        "ticks": false,
+        "domain": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 0.92,
+        "stroke": "white",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "y": {
+          "datum": 0,
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -1,
+              1
+            ]
+          },
+          "axis": null
+        },
+        "size": {
+          "field": "enrolments",
+          "type": "quantitative",
+          "scale": {
+            "type": "linear",
+            "zero": true,
+            "range": [
+              0,
+              26000
+            ]
+          },
+          "legend": null
+        },
+        "color": {
+          "field": "sector",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Government",
+              "Catholic",
+              "Independent"
+            ],
+            "range": [
+              "#16324f",
+              "#2a9d8f",
+              "#e4572e"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "sector",
+            "title": "Sector"
+          },
+          {
+            "field": "enrolments",
+            "format": ",",
+            "title": "Enrolments"
+          },
+          {
+            "field": "schools",
+            "format": ",",
+            "title": "Schools"
+          },
+          {
+            "field": "avg_size",
+            "format": ",",
+            "title": "Average enrolment per school"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": 112,
+        "fontWeight": 700,
+        "fontSize": 14,
+        "color": "#16324f"
+      },
+      "encoding": {
+        "y": {
+          "datum": 0,
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -1,
+              1
+            ]
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "lab1"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": 130,
+        "fontSize": 12.5,
+        "color": "#3b4a5a"
+      },
+      "encoding": {
+        "y": {
+          "datum": 0,
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -1,
+              1
+            ]
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "lab2"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": 147,
+        "fontSize": 12.5,
+        "color": "#3b4a5a"
+      },
+      "encoding": {
+        "y": {
+          "datum": 0,
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -1,
+              1
+            ]
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "lab3"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "sector": "Independent"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "fontStyle": "italic",
+        "fontSize": 12.5,
+        "color": "#e4572e",
+        "fontWeight": 600,
+        "text": [
+          "Fewest schools, yet the largest",
+          "average campus of any sector"
+        ],
+        "dy": -92
+      },
+      "encoding": {
+        "y": {
+          "datum": 0,
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -1,
+              1
+            ]
+          },
+          "axis": null
+        }
+      }
+    }
+  ]
+}
