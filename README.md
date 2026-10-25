@@ -2,16 +2,11 @@
 
 This report/website explores unequal opportunities within Australian Education.
 
-## Running the Website Locally:
+## Hosting
 
-Charts load JSON over HTTP, hence serving the folder rather than opening the file directly via:
+This website is hosted through github pages at:
 
-python -m http.server 8000
-
-then open http://localhost:8000. Rebuild the constructed dataset via (doesn't include manually aggregated data):
-
-pip install pandas openpyxl
-python scripts/prepare_data.py
+https://arithon2.github.io/FIT3179_DV2-Technology-in-Education/
 
 ## Data Processing notes
 
