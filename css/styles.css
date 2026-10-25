@@ -1,7 +1,6 @@
 /* Report styles. Pure.css handles the grid; everything else is here. */
 :root {
   --navy: #16324f;
-  --accent: #e4572e;
   --teal: #2a9d8f;
   --ink: #2b3a49;
   --muted: #5b6b7b;
@@ -42,7 +41,6 @@ h1, h2, h3, h4, .eyebrow, .stat, .toc a, figcaption .fig-no {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  /* color: var(--accent); */
 }
 .masthead h1 { margin: 0; font-size: 3.1rem; line-height: 1.08; color: var(--navy); letter-spacing: -0.02em; }
 .masthead .subtitle { margin: 12px 0 0; font-size: 1.45rem; font-weight: 500; color: var(--muted); font-family: "DM Sans", sans-serif; }
@@ -65,11 +63,11 @@ h1, h2, h3, h4, .eyebrow, .stat, .toc a, figcaption .fig-no {
 /* contents */
 .toc { margin: 30px 0 10px; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; }
 .toc a { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--navy); text-decoration: none; border-bottom: 2px solid transparent; }
-.toc a:hover { border-color: var(--accent); }
+.toc a:hover { border-color: var(--teal); }
 
 /* sections */
 section { margin-top: 64px; }
-section > .sec-no { font-family: "DM Sans", sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 0; }
+section > .sec-no { font-family: "DM Sans", sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin: 0; }
 section > h2 { margin: 4px 0 6px; font-size: 2rem; line-height: 1.2; color: var(--navy); letter-spacing: -0.01em; }
 section > .deck { margin: 0 0 22px; color: var(--muted); font-size: 1.1rem; }
 h3 { margin: 38px 0 6px; font-size: 1.25rem; color: var(--navy); }
@@ -98,14 +96,14 @@ figcaption.source a { color: var(--muted); }
 
 /* conclusion sketch */
 .sketch { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 28px 0 8px; }
-.sketch .step { border: 1px solid var(--line); border-top: 5px solid var(--navy); border-radius: 4px; padding: 14px 14px 12px; background: #fff; }
-.sketch .step:nth-child(2) { border-top-color: var(--teal); }
-.sketch .step:nth-child(3) { border-top-color: #e9a23b; }
-.sketch .step:nth-child(4) { border-top-color: var(--accent); }
-.sketch .step h4 { margin: 0 0 6px; font-size: 1rem; color: var(--navy); }
+.sketch .step { border: 1px solid var(--line); border-top: 5px solid var(--navy) !important; border-radius: 4px; padding: 14px 14px 12px; background: #fff; }
+/* .sketch .step:nth-child(2) { border-top-color: var(--navy); }
+.sketch .step:nth-child(3) { border-top-color: var(--navy); }
+.sketch .step:nth-child(4) { border-top-color: var(--navy); } */
+.sketch .step h4 { margin: 0 0 6px; font-size: 1rem; color: var(--navy) !important; }
 .sketch .step .ev { font-size: 0.88rem; line-height: 1.5; margin: 0 0 8px; }
 .sketch .step .gap { font-size: 0.8rem; line-height: 1.45; color: var(--muted); margin: 0; }
-.sketch .step .tag { font-family: "DM Sans", sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin: 0 0 4px; }
+.sketch .step .tag { font-family: "DM Sans", sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal) !important; margin: 0 0 4px; }
 
 /* references and notes */
 .refs { font-size: 0.92rem; line-height: 1.55; }
